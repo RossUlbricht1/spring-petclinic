@@ -8,4 +8,4 @@ version: '3.8'
       networks:
         - spring-petclinic_default
       depends_on:
-        - spring-petclinic
+        - petclinic-app
