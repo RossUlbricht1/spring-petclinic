@@ -1,0 +1,11 @@
+version: '3.8'
+  app2:
+    image: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
+    ports:
+      - 80:80
+    networks:
+      - spring-petclinic_default
+    depends_on:
+      - spring-petclinic
