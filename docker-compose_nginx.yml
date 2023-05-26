@@ -18,4 +18,4 @@ services:
       - spring-petclinic_default
 networks:
   spring-petclinic_default:
-    external: true
+    name: spring-petclinic_default
