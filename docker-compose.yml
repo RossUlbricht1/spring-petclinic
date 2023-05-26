@@ -8,6 +8,8 @@ services:
       - "8080:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=mysql
+    networks:
+      - spring-petclinic_default
 
   mysqlserver:
     container_name: mysql-docker
@@ -20,3 +22,9 @@ services:
       - MYSQL_USER=petclinic
       - MYSQL_PASSWORD=petclinic
       - MYSQL_DATABASE=petclinic
+    networks:
+      - spring-petclinic_default
+
+networks:
+  spring-petclinic_default:
+    name: spring-petclinic_default
