@@ -17,4 +17,3 @@ services:
       - spring-petclinic_default
 networks:
   spring-petclinic_default:
-    name: spring-petclinic_default
