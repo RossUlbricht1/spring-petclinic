@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 services:
   petclinic:
     build: .
@@ -9,7 +9,7 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=mysql
     networks:
-      - spring-petclinic_default
+      - mysqlnet
 
   mysqlserver:
     container_name: mysql-docker
@@ -23,8 +23,8 @@ services:
       - MYSQL_PASSWORD=petclinic
       - MYSQL_DATABASE=petclinic
     networks:
-      - spring-petclinic_default
+      - mysqlnet
 
 networks:
-  spring-petclinic_default:
-    name: spring-petclinic_default
+  mysqlnet:
+    name: mysqlnet

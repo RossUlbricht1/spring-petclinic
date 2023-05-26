@@ -14,7 +14,10 @@ services:
       - NGINX_SERVER_NAME=$(cat /ip-adress.txt)
     command: /bin/bash -c "envsubst < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
     networks:
-      - spring-petclinic_default
+      - mysqlnet
+    depends_on:
+      - petclinic
 
 networks:
-  spring-petclinic_default:
+  mysqlnet:
+    name: mysqlnet

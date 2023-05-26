@@ -8,7 +8,7 @@ http {
         server_name ${NGINX_SERVER_NAME};
 
         location / {
-            proxy_pass http://${NGINX_SERVER_NAME}:8080;
+            proxy_pass http://petclinic:8080;
         }
     }
 }
