@@ -6,8 +6,6 @@ services:
     restart: always
     ports:
       - "8080:8080"
-    networks:
-      - spring-petclinic_default
     environment:
       - SPRING_PROFILES_ACTIVE=mysql
 
@@ -22,8 +20,3 @@ services:
       - MYSQL_USER=petclinic
       - MYSQL_PASSWORD=petclinic
       - MYSQL_DATABASE=petclinic
-    networks:
-      - spring-petclinic_default
-networks:
-  spring-petclinic_default:
-      name: spring-petclinic_default
