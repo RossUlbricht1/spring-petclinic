@@ -1,25 +1,42 @@
-version: '3'
+version: '3.8'
 
 services:
   nginx:
     image: nginx
     container_name: nginx
     restart: unless-stopped
+    volumes:
+      - ./nginx.conf.template:/etc/nginx/nginx.conf.template
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+      - ./ip-address.txt:/ip-address.txt
+
     ports:
       - "80:80"
       - "443:443"
-    volumes:
-      - ./nginx.conf.template:/etc/nginx/nginx.conf.template
-      - ./ip-address.txt:/ip-address.txt
+    command: >
+      /bin/bash -c "envsubst < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'" && "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     environment:
-      - NGINX_SERVER_NAME=$(cat /ip-adress.txt)
-    command: /bin/bash -c "envsubst < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
-
+      - NGINX_SERVER_NAME=$(cat /ip-address.txt)
     networks:
       - mysqlnet
     depends_on:
       - petclinic
 
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    restart: unless-stopped
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while:; do certbot renew; sleep 12h & wait $${!}; done;'"
+    networks:
+      - mysqlnet
+
 networks:
   mysqlnet:
     name: mysqlnet
+    external: true
+
+
