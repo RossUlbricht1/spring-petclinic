@@ -9,15 +9,11 @@ services:
       - ./nginx.conf.template:/etc/nginx/nginx.conf.template
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
-      - ./ip-address.txt:/ip-address.txt
 
     ports:
       - "80:80"
       - "443:443"
-    command: >
-      /bin/bash -c "envsubst < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'" && "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
-    environment:
-      - NGINX_SERVER_NAME=$(cat /ip-address.txt)
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     networks:
       - mysqlnet
     depends_on:
