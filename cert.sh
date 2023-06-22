@@ -9,7 +9,7 @@ fi
   rsa_key_size=4096
   data_path="./certbot"
   email="lkartsev698@gmail.com"
-  staging="0"
+  staging="1"
 
 if [ -d "$data_path" ]; then
     read -p "Existing data found for $domains Continue and replace existing certificate? (y/N)" decision
@@ -37,7 +37,7 @@ docker-compose -f docker-compose_nginx.yml run --rm --entrypoint "\
 echo
 
 echo "### Starting nginx ..."
-docker-compose -f docker-compose_nginx.yml up --force-recreate -d nginx
+docker-compose -f docker-compose_nginx.yml up --force-recreate -d nginxserver
 echo
 
 echo "### Deleting dummy certificate for $domains"
@@ -72,7 +72,5 @@ docker-compose -f docker-compose_nginx.yml run --rm --entrypoint "\
 echo
 
 echo "### Reloading nginx ..."
-docker exec nginx nginx -s reload
-
-echo "***CERTBOT HAS STARTED***"
+docker exec nginxserver nginx -s reload
 
