@@ -73,3 +73,6 @@ echo
 
 echo "### Reloading nginx ..."
 docker exec nginx nginx -s reload
+
+echo "***CERTBOT HAS STARTED***"
+
