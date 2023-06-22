@@ -36,3 +36,4 @@ services:
 networks:
   mysqlnet:
     name: mysqlnet
+    external: true

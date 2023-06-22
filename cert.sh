@@ -5,7 +5,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-  domains=(www.rossulbricht.fun rossulbricht.fun)
+  domains=(rossulbricht.fun)
   rsa_key_size=4096
   data_path="./certbot"
   email="karcev.l@mail.ru"
