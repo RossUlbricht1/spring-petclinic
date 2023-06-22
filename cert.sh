@@ -8,8 +8,8 @@ fi
   domains=(rossulbricht.fun)
   rsa_key_size=4096
   data_path="./certbot"
-  email="karcev.l@mail.ru"
-  staging="1"
+  email="lkartsev698@gmail.com"
+  staging="0"
 
 if [ -d "$data_path" ]; then
     read -p "Existing data found for $domains Continue and replace existing certificate? (y/N)" decision
