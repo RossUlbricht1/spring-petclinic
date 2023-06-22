@@ -28,7 +28,7 @@ services:
     networks:
       - mysqlnet
     healthcheck:
-    test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 5s
       retries: 10
 
