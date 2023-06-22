@@ -6,14 +6,13 @@ services:
     container_name: nginx
     restart: unless-stopped
     volumes:
-      - ./nginx.conf.template:/etc/nginx/nginx.conf.template
+      - ./conf.d:/etc/nginx/conf.d
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
-
     ports:
       - "80:80"
       - "443:443"
-    command: /bin/bash -c "envsubst < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'" && "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     networks:
       - mysqlnet
 
